@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
 
   // search(term:string) {
   //   let promise = new Promise((resolve, reject) => {
-  //     let apiURL = `${this.apiRoot}?term=${term}&media=music&limit=20`;
+  //     let apiURL = `http://localhost:3000/${term}&media=music&limit=20`;
   //     this.http.get(apiURL)
   //       .toPromise()
   //       .then(
@@ -45,3 +45,17 @@ export class HomeComponent implements OnInit {
   //   return promise;
   // }
 }
+
+// le endpoint cesl localhost:3000/todos
+// avec les methodes get , get/id, post, put/id, delete/id
+//
+// {
+//   "id": "1347cb95-7f87-9719-84de-270d42c6494f",
+//   "name": "todo_node",
+//   "description": "",
+//   "order": [
+//   1 Comment Click to expand inline 150 lines
+//   Id are not right since they are generated
+//
+//   "id": "1347cb95-7f87-9719-84de-270d42c6494
+//   you don't need id in the request body
