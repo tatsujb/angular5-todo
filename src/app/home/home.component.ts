@@ -27,21 +27,21 @@ export class HomeComponent implements OnInit {
     this.itemCount = this.todo.length;
   }
 
-  search(term:string) {
-    let promise = new Promise((resolve, reject) => {
-      let apiURL = `${this.apiRoot}?term=${term}&media=music&limit=20`;
-      this.http.get(apiURL)
-        .toPromise()
-        .then(
-          res => { // Success
-            this.results = res.json().results;
-            resolve();
-          },
-          msg => { // Error
-            reject(msg);
-          }
-        );
-    });
-    return promise;
-  }
+  // search(term:string) {
+  //   let promise = new Promise((resolve, reject) => {
+  //     let apiURL = `${this.apiRoot}?term=${term}&media=music&limit=20`;
+  //     this.http.get(apiURL)
+  //       .toPromise()
+  //       .then(
+  //         res => { // Success
+  //           this.results = res.json().results;
+  //           resolve();
+  //         },
+  //         msg => { // Error
+  //           reject(msg);
+  //         }
+  //       );
+  //   });
+  //   return promise;
+  // }
 }
