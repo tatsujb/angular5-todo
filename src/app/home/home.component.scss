@@ -1,3 +1,18 @@
+$fa-font-path: "../../../node_modules/font-awesome/fonts";
+@import "../../../node_modules/font-awesome/scss/font-awesome.scss";
+
+.pointer{
+  cursor: pointer;
+}
+
+.right{
+  float: right;
+}
+
+.marginright{
+  margin-right: 10px;
+}
+
 .container {
   display: grid;
   grid-template-columns: 50% auto;
@@ -27,9 +42,81 @@ input.btn {
   margin-bottom: 1em;
   cursor: pointer;
 }
+input.btn:hover {
+  background: #d1f8c2;//#003A61;
+}
 .life-container{
   background: #3FA0E1;
   padding: .5em;
   font-weight: bold;
-  cursor: pointer;
+  margin-bottom: 9px;
+}
+
+.life-container:first-child{
+  margin-top: 50px;
+}
+
+/********SCROLLBAR*********************************************************************************/
+
+::-webkit-scrollbar {
+  width: 40px;
+}
+::-webkit-scrollbar-thumb {
+  border: 12px solid rgba(0, 0, 0, 0);
+  background-clip: padding-box;
+  -webkit-border-radius: 20px;
+  background-color: #3FA0E1;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #a6c6f9;
+}
+::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
+  display: none;
+}
+::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+/********TOOLTIP*********************************************************************************/
+
+.tooltip {
+  position: relative;
+}
+
+.tooltip .tooltiptext {
+  font-family: 'Raleway', 'Arial';
+  visibility: hidden;
+  width: 100px;
+  background-color: #2885C4;
+  text-align: center;
+  padding: 2px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 153%;
+  left: 100%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 1s;
+}
+.tooltip .tooltiptext2 {
+  left: -80%!important;
+}
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #2885C4 transparent transparent transparent;
+}
+.tooltip .tooltiptext2::after {
+  left: 76%;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
 }

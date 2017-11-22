@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HomeService } from './service/home.service';
 
 @Component({
   selector: 'app-home',
@@ -7,55 +8,72 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  itemCount: number = 0;
-  btnText: string = 'Add an item';
-  todoTitle: string = 'title';
-  todoText: string = 'TODO';
+  id: string;
+  btnText = 'Ajouter un TODO';
+  todoTitle = 'title';
+  todoText = 'TODO';
+  dueDate: string;
   todo = [];
   addingVar: Object;
-  dueDate: string;
-  constructor() { }
+  modifying = false;
 
+  constructor(private homeService: HomeService) { }
+s
   ngOnInit() {
-    this.itemCount = this.todo.length;
+    this.loadlist();
+  }
+
+  startEditing(id, name, description, dueDate) {
+    this.modifying = true;
+    this.id = id;
+    this.btnText = 'Modifier';
+    this.todoTitle = name;
+    this.todoText = description;
+    this.dueDate = dueDate;
+  }
+
+  loadlist() {
+    this.homeService.getToDo().subscribe(
+      response => this.todo = response,
+      error =>  console.log('Error happened', error));
   }
 
   addItem() {
-    // {{1288323623006 | date:"dd/MM/yyyy 'at' h:mma"}}
-    this.addingVar = {title: this.todoTitle, content: this.todoText, date: Date.now(), dueDate: this.dueDate };
-    this.todo.push(this.addingVar);
-    this.itemCount = this.todo.length;
+    if (this.modifying) {
+      this.addingVar = {name: this.todoTitle, description: this.todoText, date: Date.now(), dueDate: this.dueDate };
+      this.homeService.putToDoId(this.id, this.addingVar).subscribe(
+        response => console.log('suppresion réussie'),
+        error =>  console.log('Error happened', error));
+      this.loadlist();
+      this.btnText = 'Ajouter un TODO';
+      this.todoTitle = 'title';
+      this.todoText = 'TODO';
+      this.dueDate = '';
+      this.btnText = 'Modifier';
+    }else {
+      this.addingVar = {name: this.todoTitle, description: this.todoText, date: Date.now(), dueDate: this.dueDate };
+      this.homeService.postToDo(this.addingVar).subscribe(
+        function(response) { console.log('Success Response', response); },
+        function(error) { console.log('Error happened', error); },
+        function() { }
+      );
+      this.loadlist();
+    }
   }
 
-  // search(term:string) {
-  //   let promise = new Promise((resolve, reject) => {
-  //     let apiURL = `http://localhost:3000/${term}&media=music&limit=20`;
-  //     this.http.get(apiURL)
-  //       .toPromise()
-  //       .then(
-  //         res => { // Success
-  //           this.results = res.json().results;
-  //           resolve();
-  //         },
-  //         msg => { // Error
-  //           reject(msg);
-  //         }
-  //       );
-  //   });
-  //   return promise;
-  // }
+  deleteItem(id) {
+    this.homeService.deleteToDoId(id).subscribe(
+      response => console.log('suppresion réussie'),
+      error =>  console.log('Error happened', error));
+    this.loadlist();
+  }
+
+  loadItem() {
+    this.homeService.getToDo().subscribe(
+      function(response) { console.log('Success Response' + response); },
+      function(error) { console.log('Error happened' + error); },
+      function() { console.log('the subscription is completed'); }
+    );
+  }
 }
 
-// le endpoint cesl localhost:3000/todos
-// avec les methodes get , get/id, post, put/id, delete/id
-//
-// {
-//   "id": "1347cb95-7f87-9719-84de-270d42c6494f",
-//   "name": "todo_node",
-//   "description": "",
-//   "order": [
-//   1 Comment Click to expand inline 150 lines
-//   Id are not right since they are generated
-//
-//   "id": "1347cb95-7f87-9719-84de-270d42c6494
-//   you don't need id in the request body

@@ -4,33 +4,35 @@
 
   </div>
   <div class="col">
-    <p>My TODOS ({{ itemCount}})</p>
+    <p>My TODOS ({{ todo.length }})</p>
   </div>
 </div>
 <div class="container color-light">
   <div class="col">
-
     <form>
       <p class="sm">Utilise ce formulaire pour ajouter un todo</p>
       <input type="text" class="txt" name="title" placeholder="title" [(ngModel)]="todoTitle">
       <input type="text" class="txt" name="item" placeholder="TODO" [(ngModel)]="todoText">
       <p class="sm">Choisis une date de rendu</p>
       <input type="date" class="txt" name="input" placeholder="dd/MM/yyyy" [(ngModel)]="dueDate">
-      <!--<input class="txt"-->
-             <!--placeholder="Select a time"-->
-             <!--[(ngModel)]="ctrl.timepicker"-->
-             <!--ng-model-options="{ updateOn: 'blur' }"/>-->
       <br/>
     <input type="submit" class="btn" [value]="btnText" (click)="addItem()"/>
   </form>
   </div>
 
   <div class="col">
-    <p class="life-container" *ngFor="let todo of todo">
-      {{ todo.title }} <br/>
-      {{ todo.content }} <br/>
+    <div class="life-container" *ngFor="let todo of todo">
+      <i (click)="deleteItem( todo.id )" class="fa fa-times pointer right tooltip marginright" aria-hidden="true">
+        <span class="tooltiptext tooltiptext2">Supprimer</span>
+      </i>
+      <i (click)="startEditing(todo.id, todo.name, todo.description, todo.dueDate)" class="fa fa-pencil pointer right tooltip marginright" aria-hidden="true">
+        <span class="tooltiptext">Modifier</span>
+      </i>
+      {{ todo.name }} <br/>
+      {{ todo.description }} <br/>
       {{ todo.date | date:"dd/MM/yyyy 'à' h:mma" }} &nbsp;&nbsp;&nbsp;à rendre le : {{ todo.dueDate }}
-    </p>
+
+    </div>
   </div>
 </div>
 
