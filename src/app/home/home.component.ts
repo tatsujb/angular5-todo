@@ -45,11 +45,11 @@ s
         response => console.log('suppresion réussie'),
         error =>  console.log('Error happened', error));
       this.loadlist();
-      this.btnText = 'Ajouter un TODO';
       this.todoTitle = 'title';
       this.todoText = 'TODO';
       this.dueDate = '';
-      this.btnText = 'Modifier';
+      this.btnText = 'Ajouter un TODO';
+      this.modifying = !this.modifying;
     }else {
       this.addingVar = {name: this.todoTitle, description: this.todoText, date: Date.now(), dueDate: this.dueDate };
       this.homeService.postToDo(this.addingVar).subscribe(
