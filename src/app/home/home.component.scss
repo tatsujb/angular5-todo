@@ -22,12 +22,7 @@ $fa-font-path: "../../../node_modules/font-awesome/fonts";
   max-height: 58vh;
   overflow-y: auto;
 }
-.color-dark {
-  background: #2885C4;
-}
-.color-light {
-  background: #57B3F1;
-}
+
 input.txt {
   border: 0;
   padding: 1em;
@@ -38,22 +33,56 @@ input.btn {
   border: 0;
   display: block;
   padding: 1em 3em;
-  background: #A5F883;//#003A61;
+  background-color: #A5F883;//#003A61;
   margin-bottom: 1em;
   cursor: pointer;
+  &:hover {
+    background: #d1f8c2;
+  }
 }
-input.btn:hover {
-  background: #d1f8c2;//#003A61;
-}
+
 .life-container{
   background: #3FA0E1;
   padding: .5em;
   font-weight: bold;
   margin-bottom: 9px;
 }
-
 .life-container:first-child{
   margin-top: 50px;
+}
+
+.color-dark {
+  background-color: #2885C4;
+}
+.color-light {
+  background-color: #57B3F1;
+}
+.colorOne>.container>.col:first-child{
+  background-color: #3fc48c;
+  box-shadow: -200px 0 200px -100px #2885C4 inset;
+  -webkit-transition: background-color 5s linear;
+  -moz-transition: background-color 5s linear;
+  -ms-transition: background-color 5s linear;
+  -o-transition: background-color 5s linear;
+  transition: background-color 5s linear;
+}
+
+.colorTwo>.container>.col:first-child{
+  background-color: #71f1b2;
+  box-shadow: -200px 0 200px -100px #57B3F1 inset;
+  -webkit-transition: background-color 5s linear;
+  -moz-transition: background-color 5s linear;
+  -ms-transition: background-color 5s linear;
+  -o-transition: background-color 5s linear;
+  transition: background-color 5s linear;
+}
+.colorTwo input.btn {
+  color: white;
+  background-color: #4adabf;
+  &:hover {
+    background: #8fdfcc;
+  }
+
 }
 
 /********SCROLLBAR*********************************************************************************/

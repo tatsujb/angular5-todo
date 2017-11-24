@@ -16,6 +16,9 @@ export class HomeComponent implements OnInit {
   todo = [];
   addingVar: Object;
   modifying = false;
+  colorOne = '';
+  colorTwo = '';
+  start_time = new Date();
 
   constructor(private homeService: HomeService) { }
 s
@@ -30,6 +33,8 @@ s
     this.todoTitle = name;
     this.todoText = description;
     this.dueDate = dueDate;
+    this.colorOne = 'colorOne';
+    this.colorTwo = 'colorTwo';
   }
 
   loadlist() {
@@ -50,6 +55,8 @@ s
       this.dueDate = '';
       this.btnText = 'Ajouter un TODO';
       this.modifying = !this.modifying;
+      this.colorOne = '';
+      this.colorTwo = '';
     }else {
       this.addingVar = {name: this.todoTitle, description: this.todoText, date: Date.now(), dueDate: this.dueDate };
       this.homeService.postToDo(this.addingVar).subscribe(
