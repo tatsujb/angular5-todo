@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { HomeService } from './service/home.service';
+import {$} from 'protractor';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,7 @@ import { HomeService } from './service/home.service';
 export class HomeComponent implements OnInit {
 
   id: string;
-  btnText = 'Ajouter un TODO';
+  btnText = 'Ajouter une tâche à faire';
   todoTitle = 'title';
   todoText = 'TODO';
   dueDate: string;
@@ -19,15 +20,17 @@ export class HomeComponent implements OnInit {
   colorOne = '';
   colorTwo = '';
   start_time = new Date();
+  formtxt = 'Utilise ce formulaire pour ajouter un todo';
 
-  constructor(private homeService: HomeService) { }
-s
+  constructor(private homeService: HomeService, private zone: NgZone ) {
+  }
+
   ngOnInit() {
     this.loadlist();
   }
 
   startEditing(id, name, description, dueDate) {
-    this.modifying = true;
+    this.modifying = !this.modifying;
     this.id = id;
     this.btnText = 'Modifier';
     this.todoTitle = name;
@@ -35,6 +38,7 @@ s
     this.dueDate = dueDate;
     this.colorOne = 'colorOne';
     this.colorTwo = 'colorTwo';
+    this.formtxt = 'Modifiez les valeurs';
   }
 
   loadlist() {
@@ -53,10 +57,11 @@ s
       this.todoTitle = 'title';
       this.todoText = 'TODO';
       this.dueDate = '';
-      this.btnText = 'Ajouter un TODO';
+      this.btnText = 'Ajouter une tâche à faire';
       this.modifying = !this.modifying;
       this.colorOne = '';
       this.colorTwo = '';
+      this.formtxt = 'Utilise ce formulaire pour ajouter un todo';
     }else {
       this.addingVar = {name: this.todoTitle, description: this.todoText, date: Date.now(), dueDate: this.dueDate };
       this.homeService.postToDo(this.addingVar).subscribe(
@@ -66,6 +71,7 @@ s
       );
       this.loadlist();
     }
+    location.reload();
   }
 
   deleteItem(id) {
@@ -73,14 +79,11 @@ s
       response => console.log('suppresion réussie'),
       error =>  console.log('Error happened', error));
     this.loadlist();
+    location.reload();
   }
 
-  loadItem() {
-    this.homeService.getToDo().subscribe(
-      function(response) { console.log('Success Response' + response); },
-      function(error) { console.log('Error happened' + error); },
-      function() { console.log('the subscription is completed'); }
-    );
+  titleHasError() {
+    return false;
   }
 }
 

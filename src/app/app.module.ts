@@ -9,7 +9,29 @@ import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import {HomeService} from './home/service/home.service';
 import { HttpModule} from '@angular/http';
+import 'typeface-roboto';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatButtonModule, MatCheckboxModule, MatMenuModule,
+  MatToolbarModule,
+  MatIconModule,
+  MatCardModule,
+  MatSidenavModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatTooltipModule} from '@angular/material';
 
+const materialModules = [
+  MatButtonModule,
+  MatCheckboxModule,
+  MatMenuModule,
+  MatToolbarModule,
+  MatIconModule,
+  MatCardModule,
+  MatSidenavModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatTooltipModule
+];
 
 @NgModule({
   declarations: [
@@ -19,8 +41,18 @@ import { HttpModule} from '@angular/http';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
+    materialModules,
+    HttpModule
+  ],
+  exports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    FormsModule,
+    materialModules,
     HttpModule
   ],
   providers: [HomeService],
